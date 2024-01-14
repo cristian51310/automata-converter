@@ -5,7 +5,9 @@ import AutomataForm from "./form";
 import useDataStore from "./store/useDataStore";
 
 export default function App() {
-  const { grafoOriginal, grafoResultante } = useDataStore()
+  const { grafoOriginal, grafoResultante, transitions, alphabet, resumeTransitions } = useDataStore()
+
+
 
   return (
     <main className="p-12 py-8">
@@ -26,12 +28,14 @@ export default function App() {
 
             <p className="text-xl font-bold mt-7">Tabla de transiciones</p>
             <Card className="mt-5 flex flex-col gap-6 justify-center items-center p-4">
-              <Tabla />
+              <Tabla transitions={transitions} alphabet={alphabet} />
             </Card>
 
-            <p className="text-xl font-bold mt-7">Tabla de transiciones resumida</p>
+            <p className="text-xl font-bold mt-7">Tabla resumida</p>
             <Card className="mt-5 flex flex-col gap-6 justify-center items-center p-4">
-              <Tabla />
+              {resumeTransitions && (
+                <Tabla transitions={resumeTransitions} alphabet={alphabet} />
+              )}
             </Card>
 
             <p className="text-xl font-bold mt-7">Grafo Resultante (AFD)</p>

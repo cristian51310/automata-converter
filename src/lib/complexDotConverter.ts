@@ -3,9 +3,10 @@ import { Transiciones } from "@/types/transition";
 export function ComplexDotConverter(
   transiciones: Transiciones[],
   initialState: string,
-  finalStates: string[]
 ): string {
-  let dotCode = 'digraph {\n';
+  let dotCode = ""
+
+  dotCode = 'digraph {\n';
 
   // agregar setup
   dotCode += `
@@ -31,12 +32,6 @@ export function ComplexDotConverter(
     }
   }
 
-  // agregar los estados finales
-  for (const finalState of finalStates) {
-    dotCode += `
-        ${finalState} [shape = doublecircle]
-      `
-  }
 
   dotCode += '}';
 

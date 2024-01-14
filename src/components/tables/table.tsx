@@ -1,10 +1,13 @@
-import useDataStore from '@/store/useDataStore';
+import { Transiciones } from '@/types/transition';
 import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 
-export default function Tabla() {
-  const { transitions, alphabet, states, initialState, finalStates } = useDataStore();
+interface TablaProps {
+  transitions: Transiciones[];
+  alphabet: string[];
+}
 
+export default function Tabla({ transitions, alphabet }: TablaProps) {
   return (
     <Table>
       <TableHeader>

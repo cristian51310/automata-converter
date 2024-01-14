@@ -1,7 +1,7 @@
-import { obtenerCombinacionesTransiciones } from "@/lib/combinaciones-transiciones"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { obtenerCombinacionesTransiciones } from "@/lib/combinaciones-transiciones"
 import { ComplexDotConverter } from "@/lib/complexDotConverter"
 import { formatearTransiciones } from "@/lib/formatearTransiciones"
 import { SimpleDotConverter } from "@/lib/simpleDotConverter"
@@ -11,6 +11,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useFieldArray, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import * as z from "zod"
+import { convertirAFDAArreglo } from "./lib/formatearSimplificarAfd"
+import { simplificarAFDtest } from "./lib/simplificarAfd"
+import { convertirArregloAAFD } from "./lib/transicionarAFD"
 
 const formSchema = z.object({
   alphabet: z.string(),
@@ -53,8 +56,7 @@ export default function AutomataForm() {
     setTransitions,
     setGrafoOriginal,
     setGrafoResultante,
-    finalStates,
-    initialState
+    setResumeTransitions,
   } = useDataStore()
 
   const form = useForm<FormValues>({
@@ -77,8 +79,10 @@ export default function AutomataForm() {
     const transitions = formatearTransiciones(data.transitions)
     const transicionesCombinadas = obtenerCombinacionesTransiciones(transitions)
 
+    setGrafoResultante("")
+
     const grafoOriginal = SimpleDotConverter(transitions, initialState, finalStates)
-    const grafoResultante = ComplexDotConverter(transicionesCombinadas, initialState, finalStates)
+
 
     setStates(states)
     setAlphabet(alphabet)
@@ -86,11 +90,22 @@ export default function AutomataForm() {
     setFinalStates(finalStates)
     setTransitions(transicionesCombinadas)
     setGrafoOriginal(grafoOriginal)
-    setGrafoResultante(grafoResultante)
+
 
     toast.success("Datos guardados correctamente")
 
-    console.log("Transiciones", transitions)
+    //
+    console.log("Transiciones completas", transicionesCombinadas)
+
+    const afdsilvana = convertirArregloAAFD(transicionesCombinadas)
+    const afdsilvanafinal = simplificarAFDtest(afdsilvana, initialState)
+
+    const afdsilvanafinalfinal = convertirAFDAArreglo(afdsilvanafinal)
+
+    const grafoResultante = ComplexDotConverter(afdsilvanafinalfinal, initialState)
+    setGrafoResultante(grafoResultante)
+
+    setResumeTransitions(afdsilvanafinalfinal)
   }
 
   return (

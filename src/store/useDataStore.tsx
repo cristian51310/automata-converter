@@ -1,7 +1,7 @@
-import { obtenerCombinacionesTransiciones } from '@/lib/combinaciones-transiciones';
-import { create } from 'zustand';
-import { Transiciones } from '@/types/transition';
 import { grafoOriginal, grafoResultante } from '@/data/grafos';
+import { obtenerCombinacionesTransiciones } from '@/lib/combinaciones-transiciones';
+import { Transiciones } from '@/types/transition';
+import { create } from 'zustand';
 
 interface DataStore {
   states: string[];
@@ -14,6 +14,8 @@ interface DataStore {
   setFinalStates: (newFinalStates: string[]) => void;
   transitions: Transiciones[];
   setTransitions: (newTransitions: any) => void;
+  resumeTransitions: Transiciones[] | null
+  setResumeTransitions: (newResumeTransitions: any) => void;
   grafoOriginal: string;
   setGrafoOriginal: (newGrafoOriginal: string) => void;
   grafoResultante: string;
@@ -43,6 +45,9 @@ const useDataStore = create<DataStore>((set) => ({
 
   transitions: transitions2Complete,
   setTransitions: (newTransitions: any) => set({ transitions: newTransitions }),
+
+  resumeTransitions: null,
+  setResumeTransitions: (newResumeTransitions: any) => set({ resumeTransitions: newResumeTransitions }),
 
   grafoOriginal,
   setGrafoOriginal: (newGrafoOriginal: string) => set({ grafoOriginal: newGrafoOriginal }),
