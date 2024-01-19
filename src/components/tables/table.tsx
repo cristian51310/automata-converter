@@ -2,12 +2,12 @@ import { Transiciones } from '@/types/transition';
 import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 
-interface TablaProps {
+interface Props {
   transitions: Transiciones[];
   alphabet: string[];
 }
 
-export default function Tabla({ transitions, alphabet }: TablaProps) {
+export default function Tabla({ transitions, alphabet }: Props) {
   return (
     <Table>
       <TableHeader>
@@ -33,7 +33,6 @@ export default function Tabla({ transitions, alphabet }: TablaProps) {
           </TableRow>
         ))}
       </TableBody>
-
     </Table>
   );
 };

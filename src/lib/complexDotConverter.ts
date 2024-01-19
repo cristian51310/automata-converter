@@ -10,7 +10,7 @@ export function ComplexDotConverter(
 
   // agregar setup
   dotCode += `
-    rankdir=RL;
+    rankdir=LR;
     node [shape = circle]
   `
 

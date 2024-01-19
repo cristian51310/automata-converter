@@ -1,7 +1,7 @@
 export const grafoOriginal = `
   digraph { 
     node [shape = circle]
-    rankdir=RL;
+    rankdir=LR;
 
     inicio [style = invis] 
     inicio -> q0 

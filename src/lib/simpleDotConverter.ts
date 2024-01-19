@@ -12,7 +12,7 @@ export function SimpleDotConverter(
     fontname = "Helvetica,Arial,sans-serif"
     node [fontname = "Helvetica,Arial,sans-serif"]
     edge [fontname = "Helvetica,Arial,sans-serif"]
-    rankdir=RL;
+    rankdir=LR;
     node [shape = circle]
   `
 

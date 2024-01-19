@@ -209,7 +209,6 @@ export default function AutomataForm() {
           <div className="flex gap-2 mt-2">
             <Button
               variant="outline"
-              size="sm"
               onClick={() => append({ value: "" })}
             >
               Añadir transicion
@@ -217,7 +216,6 @@ export default function AutomataForm() {
 
             <Button
               variant="outline"
-              size="sm"
               onClick={() => remove(fields.length - 1)}
             >
               Eliminar transicion
@@ -231,5 +229,4 @@ export default function AutomataForm() {
       </form>
     </Form>
   )
-
 }
